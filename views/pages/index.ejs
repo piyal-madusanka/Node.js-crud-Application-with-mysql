@@ -1,0 +1,57 @@
+<%- include('../partials/header') %>
+
+
+<br>
+<div class="container">
+    <h2>Simple Node.js Crud Application</h2>
+    <p>This is created by using node.js and mysql database server:</p>  
+    <div class="col s12">
+        <a href="/adduser" class="btn btn-primary btn-lg">Add new user</a>
+    
+    </div>    
+    <br>    
+    <% if(item.length>0){ %>  
+    <table class="table table-dark">
+      <thead>
+        <tr>
+            <th>Index</th>
+          <th>User name</th>
+          <th>Password</th>
+          <th>Action-edit</th>
+          <th>Action-delete</th>
+        </tr>
+      </thead>
+
+      <tbody>
+          <% item.forEach((item,index)=>{ %>
+
+        <tr>
+          <td><%= item.id %> </td>
+          <td><%= item.username %></td>
+          <td><%= item.password %></td>
+          
+          <td>
+            <form action="/updateuser" method="POST">
+              <input type="hidden" name="id" value="<%= item.id%>">
+            <button class="btn btn-success" type="submit" >Edit</button> 
+          </form>
+          </td>
+          <td>
+            <form action="/deleteuser" method="POST">
+              <input type="hidden" name="id" value="<%= item.id%>">
+            <button class="btn btn-danger" type="submit" >Delete</button> 
+          </form>
+          </td>
+        </tr>
+      <%   }); %>  
+      </tbody>
+    </table>
+    <% }else{%>
+        <p>No record found</p>
+
+        <%}%>
+    
+  </div>
+
+
+<%- include('../partials/footer') %>
